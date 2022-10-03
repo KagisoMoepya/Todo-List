@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+:root {
+    --text_color: #e1dfdf;
+}
+
+body {
+    margin: 0%;
+    padding: 0%;
+    background-image: linear-gradient(90deg, rgb(2, 86, 170), dodgerblue);
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    font-size: 4rem;
+    letter-spacing: 1vw;
+    color: rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: -1;
+}
+
+/* Navigation of Lists */
+
+nav {
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    display: flex;
+    justify-content: center;
+    width: 25rem;
+    height: 100vh;
+    color: var(--text_color);
+    /* background-color: red; */
+}
+
+
+#nav_items {
+    width: 75%;
+    /* background-color: yellow; */
+    position: relative;
+    top: 5rem;
+}
+
+#new_list {
+    display: flex;
+    min-height: 2.5rem;
+}
+
+#list_add_btn_wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 15%;
+    /* background-color: red; */
+}
+
+#list_items {
+    position: relative;
+    left: 2.5%;
+    font-size: 0.8rem;
+}
+
+#list_name_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+}
+
+#list_name_wrapper input {
+    width: 90%;
+    padding: 0 0 4% 0;
+    border: none;
+    outline: none;
+    border-bottom: 1.5px solid #adadad;
+    background: transparent;
+    color: var(--text_color);
+}
+
