@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"><link rel="stylesheet" href="./Styles/index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link rel="stylesheet" href="./Styles/index.css">
+    <script src="./Javascript/navigation.jsx" defer></script>
     <title>Todo List</title>
 </head>
 <body>
 
     <header>Stuff I need to do</header>
 
+    <!-- Lists navigation bar -->
     <nav>
 
         <div id="nav_items">
 
-            <h4>My List</h4>
+            <h4>My lists</h4>
 
-            <div id="list_items">
-                <li>Hello World</li>
-            </div>
+            <!-- Names of Lists -->
+            <div id="list_items"></div>
 
-            <div id="new_list">
-                <div id="list_add_btn_wrapper">
-                    <span class="material-icons-outlined">add_circle_outline</span>
+            <!-- Input of new List and Submit button -->
+            <div id="add_list_wrapper">
+                <div id="add_list_btn_wrapper">
+                    <span for="list_name" class="material-icons-round">add</span>
                 </div>
+
                 <div id="list_name_wrapper">
-                    <input type="text" name="list_name" id="list_name">
-                    <label for="list_name"></label>
+                    <input type="text" name="list_name" id="list_name" placeholder="Add a new list Name">
                 </div>
             </div>
 
