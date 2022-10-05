@@ -14,7 +14,8 @@ window.addEventListener('load', (e) => {
     })
     
     if(!('active_list' in localStorage)) return localStorage.setItem('active_list', '')
-    console.log(localStorage.removeItem('active_list'))
+    returnActiveList()
+
 })
 
 list_name.addEventListener('keyup', (e) => {
@@ -49,7 +50,8 @@ function makeListSelectable(list_item_wrapper) {
 
         if(list_item_wrapper === e.target) {
             list_item_wrapper.classList.add('active')
-            localStorage.setItem('active_list', list_item_wrapper)
+            localStorage.setItem('active_list', list_item_wrapper.outerHTML)
+
         } else if(list_item_wrapper.classList.contains('active')) {
             list_item_wrapper.classList.remove('active')
         }
@@ -57,12 +59,29 @@ function makeListSelectable(list_item_wrapper) {
     })
 }
 
+function returnActiveList() {
+    const list_item_wrapper = new DOMParser().parseFromString(localStorage.getItem('active_list'), "text/xml")
+    const list_name_selector = list_item_wrapper.querySelector('.list_name_selector')
+    const selector_text = list_name_selector.textContent
+    const data_order = list_item_wrapper.querySelector('div').getAttribute('data-order')
+
+    list_items.querySelectorAll('.list_item_wrapper').forEach(list_item => {
+        
+        if(list_item.getAttribute('data-order') === data_order) {
+            list_item.classList.add('active')
+        }
+
+    })
+}
+
 function createListItem(value) {
+    const list_len = list_items.querySelectorAll('.list_item_wrapper').length + 1
     const new_list_item_wrapper = document.createElement('div')
     const new_list_circle = document.createElement('div')
     const new_list_name_selector = document.createElement('div')
 
     new_list_item_wrapper.setAttribute('class', 'list_item_wrapper')
+    new_list_item_wrapper.setAttribute('data-order', list_len)
     new_list_circle.setAttribute('class', 'list_circle')
     new_list_name_selector.setAttribute('class', 'list_name_selector')
 

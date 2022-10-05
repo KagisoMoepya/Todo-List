@@ -1,16 +1,21 @@
 :root {
+    --list_name_color: #535353;
     --text_color: #e1dfdf;
+    --primary: #0256aa;
 }
 
 body {
     margin: 0%;
     padding: 0%;
-    background-image: linear-gradient(90deg, rgb(2, 86, 170), dodgerblue);
+    background-image: linear-gradient(90deg, #0256aa, dodgerblue);
     font-family: Arial, Helvetica, sans-serif;
     cursor: default;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 header {
+    width: 100vw;
     font-weight: 900;
     font-size: 4rem;
     letter-spacing: 1vw;
@@ -22,20 +27,19 @@ header {
 /* Navigation of Lists */
 
 nav {
-    position: fixed;
-    left: 0%;
+    position: sticky;
     top: 0%;
+    left: 0%;
     display: flex;
     justify-content: center;
     width: 25rem;
-    height: 100vh;
+    min-height: 25vh;
     color: var(--text_color);
+    /* background-color: red; */
 }
 
 #nav_items {
     width: 75%;
-    position: relative;
-    top: 5rem;
 }
 
 #nav_items h4 {
@@ -60,12 +64,12 @@ nav {
     justify-content: left;
     align-items: center;
     font-size: 0.8rem;
-    /* background-color: red; */
+    cursor: pointer;
 }
 
 .list_item_wrapper.active {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .list_name_selector {
@@ -80,7 +84,6 @@ nav {
     border: 2px solid var(--text_color);
     border-radius: 50%;
     z-index: -1;
-
 }
 
 #add_list_wrapper {
@@ -128,4 +131,154 @@ nav {
 #list_name_wrapper input::-webkit-input-placeholder {
     color: var(--text_color);
     font-size: 0.75rem;
+}
+
+/* Section of tasks box */
+
+section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#list_content_container {
+    position: relative;
+    top: 2.5rem;
+    width: 22.5rem;
+    min-height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+#tasks_container {
+    width: 100%;
+    min-height: 15rem;
+    background-color: var(--text_color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
+}
+
+.tasks_count_wrapper {
+    background-color: #d9d8d8;
+    color: #9e9d9d;
+    width: 100%;
+    min-height: 4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tasks_count_wrapper h3 {
+    margin-left: 4%;
+    font-size: 1rem;
+    color: var(--list_name_color);
+}
+
+.tasks_count_wrapper p {
+    margin-right: 4%;
+    font-size: 0.8rem;
+}
+
+.tasks_selectors_wrapper {
+    padding: 2.5% 0 2.5% 0;
+    width: 100%;
+    min-height: 3rem;
+    background-color: var(--text_color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task_selector {
+    width: 80%;
+    min-height: 3rem;
+    /* background-color: green; */
+    display: flex;
+    border-bottom: 1px solid #b6b6b6;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.task_selector .task_circle {
+    width: 10%;
+    /* background-color: yellowgreen; */
+    display: flex;
+    align-items: center;
+    z-index: -1;
+}
+
+.task_selector .task_circle div {
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 2px solid white;
+    outline: 2px solid var(--primary);
+    background-color: var(--primary);
+    border-radius: 50%;
+}
+
+.task_selector .task_text {
+    color: var(--list_name_color);
+    width: 90%;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    z-index: -1;
+}
+
+.task_input_wrapper {
+    width: 80%;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 5% 0;
+}
+
+.task_input_wrapper span {
+    position: relative;
+    bottom: 0.25rem;
+    right: 1%;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.task_input_wrapper input {
+    width: 90%;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--list_name_color);
+    background-color: transparent;
+    padding: 0 0 2.5% 0;
+    color: rgb(33, 33, 33);
+}
+
+.task_input_wrapper input::-webkit-input-placeholder {
+    color: #b6b6b6;
+    font-size: 0.9rem;
+}
+
+.tasks_buttons {
+    position: relative;
+    left: 4%;
+    width: 72.5%;
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.task_button {
+    cursor: pointer;
+    color: var(--text_color);
+    transition: all 0.1s ease-out;
+}
+
+.task_button:hover {
+    color: var(--list_name_color);
 }
