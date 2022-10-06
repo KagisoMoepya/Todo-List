@@ -198,19 +198,15 @@ section {
     width: 80%;
     min-height: 3rem;
     display: flex;
+    align-items: center;
     border-bottom: 1px solid #b6b6b6;
     cursor: pointer;
 }
 
 .task_selector .task_circle {
-    width: 10%;
-    display: flex;
-    align-items: center;
-}
-
-.task_selector .task_circle div {
     width: 0.5rem;
     height: 0.5rem;
+    margin: 0 1rem 0 0;
     border: 2px solid transparent;
     outline: 2px solid rgb(71, 71, 71);
     background-color: transparent;
@@ -232,7 +228,7 @@ section {
     transition: all 0.3s ease-out;
 }
 
-.completed .task_circle div {
+.completed .task_circle {
     border: 2px solid white;
     outline: 2px solid var(--primary);
     background-color: var(--primary);
