@@ -187,7 +187,7 @@ section {
 .tasks_selectors_wrapper {
     padding: 2.5% 0 2.5% 0;
     width: 100%;
-    min-height: 3rem;
+    min-height: 2.5rem;
     background-color: var(--text_color);
     display: flex;
     flex-direction: column;
@@ -197,27 +197,23 @@ section {
 .task_selector {
     width: 80%;
     min-height: 3rem;
-    /* background-color: green; */
     display: flex;
     border-bottom: 1px solid #b6b6b6;
     cursor: pointer;
-    z-index: 2;
 }
 
 .task_selector .task_circle {
     width: 10%;
-    /* background-color: yellowgreen; */
     display: flex;
     align-items: center;
-    z-index: -1;
 }
 
 .task_selector .task_circle div {
     width: 0.5rem;
     height: 0.5rem;
-    border: 2px solid white;
-    outline: 2px solid var(--primary);
-    background-color: var(--primary);
+    border: 2px solid transparent;
+    outline: 2px solid rgb(71, 71, 71);
+    background-color: transparent;
     border-radius: 50%;
 }
 
@@ -227,8 +223,20 @@ section {
     display: flex;
     align-items: center;
     font-size: 0.9rem;
-    z-index: -1;
 }
+
+.completed  {
+    text-decoration: line-through;
+    color: rgb(103, 103, 103);
+    opacity: 0.7;
+    transition: all 0.3s ease-out;
+}
+
+.completed .task_circle div {
+    border: 2px solid white;
+    outline: 2px solid var(--primary);
+    background-color: var(--primary);
+} 
 
 .task_input_wrapper {
     width: 80%;
@@ -255,6 +263,10 @@ section {
     background-color: transparent;
     padding: 0 0 2.5% 0;
     color: rgb(33, 33, 33);
+}
+
+.task_input_wrapper input:focus {
+    border-bottom: 3px solid var(--list_name_color);
 }
 
 .task_input_wrapper input::-webkit-input-placeholder {

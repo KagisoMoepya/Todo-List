@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link rel="stylesheet" href="./Styles/index.css">
-    <script src="./Javascript/navigation.jsx" defer></script>
-    <script src="./Javascript/tasks_box.jsx" defer></script>
+    <script type="module" src="./Javascript/index.js" defer></script>
+    <script type="module" src="./Javascript/tasks_box.js" defer></script>
+    <script type="module" src="./Javascript/navigation.js" defer></script>
     <title>Todo List</title>
 </head>
 <body>
@@ -21,7 +22,20 @@
             <h4>My lists</h4>
 
             <!-- Names of Lists -->
-            <div id="list_items"></div>
+            <div id="list_items">
+                <div class="list_item_wrapper active" data-order="">
+                    <div class="list_circle" data-order=""></div>
+                    <div class="list_name_selector" data-order="">Hello World</div>
+                </div>
+                <div class="list_item_wrapper" data-order="">
+                    <div class="list_circle" data-order=""></div>
+                    <div class="list_name_selector" data-order="">Hello World</div>
+                </div>
+                <div class="list_item_wrapper" data-order="">
+                    <div class="list_circle" data-order=""></div>
+                    <div class="list_name_selector" data-order="">Hello World</div>
+                </div>
+            </div>
 
             <!-- Input of new List and Submit button -->
             <div id="add_list_wrapper">
@@ -46,7 +60,7 @@
                     <h3>New year important</h3>
                     <p>2 tasks remaining</p>
                 </div>
-                
+
                 <div class="tasks_selectors_wrapper">
                     <div data-task-order="" class="task_selector">
                         <div data-task-order="" class="task_circle"><div></div></div>
@@ -60,14 +74,14 @@
                         <div class="task_circle"><div></div></div>
                         <div class="task_text">create new task</div>
                     </div>
-                    
+
                 </div>
-    
+
                 <div class="task_input_wrapper">
                     <span for="list_name" class="material-icons-round">add</span>
                     <input type="text" name="task_input" id="task_input" placeholder="enter a new task">
                 </div>
-                
+
             </div>
 
             <div class="tasks_buttons">
@@ -78,6 +92,6 @@
         </div>
 
     </section>
-    
+
 </body>
 </html>
