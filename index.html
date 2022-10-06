@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link rel="stylesheet" href="./Styles/index.css">
-    <script type="module" src="./Javascript/index.js" defer></script>
-    <script type="module" src="./Javascript/tasks_box.js" defer></script>
-    <script type="module" src="./Javascript/navigation.js" defer></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/index.css">
+    <script type="module" src="./javascript/Index.js" defer></script>
+    <script type="module" src="./javascript/ListsController.js" defer></script>
+    <script type="module" src="./javascript/List.js" defer></script>
+    <script type="module" src="./javascript/Task.js" defer></script>
     <title>Todo List</title>
 </head>
 <body>
@@ -22,20 +24,7 @@
             <h4>My lists</h4>
 
             <!-- Names of Lists -->
-            <div id="list_items">
-                <div class="list_item_wrapper active" data-order="">
-                    <div class="list_circle" data-order=""></div>
-                    <div class="list_name_selector" data-order="">Hello World</div>
-                </div>
-                <div class="list_item_wrapper" data-order="">
-                    <div class="list_circle" data-order=""></div>
-                    <div class="list_name_selector" data-order="">Hello World</div>
-                </div>
-                <div class="list_item_wrapper" data-order="">
-                    <div class="list_circle" data-order=""></div>
-                    <div class="list_name_selector" data-order="">Hello World</div>
-                </div>
-            </div>
+            <div id="list_items"></div>
 
             <!-- Input of new List and Submit button -->
             <div id="add_list_wrapper">
