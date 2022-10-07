@@ -1,4 +1,3 @@
-import { list_items, list_item_wrapper } from './Index.js'
 import { Task } from './Task.js'
 
 export class List {
@@ -9,12 +8,9 @@ export class List {
      */
     constructor(list_name, list_index) {
         this.list_name = list_name
-        this.active_status = "inactive"
+        this.active_status = 'inactive'
         this.list_index = list_index
         this.tasks_array = []
-        list_items.innerHTML += this.createListDOM
-        this.list_item = list_items.querySelectorAll('.list_item_wrapper').item(list_index)
-        this.onListClick()
     }
 
     get getActiveStatus () {
@@ -56,14 +52,6 @@ export class List {
         this.tasks_array.push(new Task(task_text))
     }
 
-    onListClick() {
-        this.list_item.addEventListener('click', e => {
-            
-
-        })
-    }
-    
-
     get createListDOM() {
         return `<div class="list_item_wrapper ${this.active_status}" data-list-index="${this.list_index}">
                         <div class="list_circle"></div>
@@ -75,20 +63,26 @@ export class List {
     get createTasksBoxDOM() {
         return (`
             <div id="list_content_container">
-
                 <div id="tasks_container">
                     <div class="tasks_count_wrapper">
-                        <h3>Testing testing</h3>
-                        <p><span class="tasks_count">0</span> tasks remaining</p>
+                        <h3>New year important</h3>
+                        <p>2 tasks remaining</p>
                     </div>
-                    
-                    <div class="tasks_selectors_wrapper"></div>
-        
+
+                    <div class="tasks_selectors_wrapper">
+                        <div data-task-order="" class="task_selector completed">
+                            <div data-task-order="" class="task_circle"></div>
+                            <div data-task-order="" class="task_text">create new task</div>
+                        </div>
+                        
+
+                    </div>
+
                     <div class="task_input_wrapper">
                         <span for="list_name" class="material-icons-round">add</span>
-                        <input type="text" name="task_input" id="task_input" placeholder="enter a new task" required>
+                        <input type="text" name="task_input" id="task_input" placeholder="enter a new task">
                     </div>
-                    
+
                 </div>
 
                 <div class="tasks_buttons">
