@@ -44,6 +44,17 @@ export class List {
         return this.tasks_array
     }
 
+    get getRemainingTasks() {
+        let remaining_count = 0
+        this.tasks_array.forEach(task => {
+            const task_status = task.getTaskStatus
+
+            if(task_status === 'incomplete') remaining_count++
+        })
+
+        return remaining_count
+    }
+
     /**
      * Inserts a task inside of the array of tasks (tasks_array).
      * @param {any} task_text
@@ -65,8 +76,8 @@ export class List {
             <div id="list_content_container">
                 <div id="tasks_container">
                     <div class="tasks_count_wrapper">
-                        <h3>New year important</h3>
-                        <p>2 tasks remaining</p>
+                        <h3>${this.list_name}</h3>
+                        <p>${this.getRemainingTasks} tasks remaining</p>
                     </div>
 
                     <div class="tasks_selectors_wrapper">
@@ -74,8 +85,6 @@ export class List {
                             <div data-task-order="" class="task_circle"></div>
                             <div data-task-order="" class="task_text">create new task</div>
                         </div>
-                        
-
                     </div>
 
                     <div class="task_input_wrapper">

@@ -14,4 +14,28 @@ export class Task {
         return this.task_text
     }
 
+    get getTaskIndex() {
+        return this.task_index
+    }
+
+    /**
+     * @param {any} task_index
+     */
+    set setTaskIndex(task_index) {
+        this.task_index = task_index
+    }
+
+    get getTaskStatus() {
+        return this.task_status
+    }
+
+    /**
+     * @param {string} task_status
+     */
+    set setTaskStatus(task_status) {
+        this.task_status = task_status
+    }
+
+    
+
 }
