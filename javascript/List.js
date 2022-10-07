@@ -1,4 +1,4 @@
-import { list_items } from './Index.js'
+import { list_items, list_item_wrapper } from './Index.js'
 import { Task } from './Task.js'
 
 export class List {
@@ -13,6 +13,8 @@ export class List {
         this.list_index = list_index
         this.tasks_array = []
         list_items.innerHTML += this.createListDOM
+        this.list_item = list_items.querySelectorAll('.list_item_wrapper').item(list_index)
+        this.onListClick()
     }
 
     get getActiveStatus () {
@@ -54,14 +56,19 @@ export class List {
         this.tasks_array.push(new Task(task_text))
     }
 
+    onListClick() {
+        this.list_item.addEventListener('click', e => {
+            
+
+        })
+    }
+    
+
     get createListDOM() {
-        return `
-                \n
-                    <div class="list_item_wrapper">
+        return `<div class="list_item_wrapper ${this.active_status}" data-list-index="${this.list_index}">
                         <div class="list_circle"></div>
                         <div class="list_name_selector">${this.list_name}</div>
-                    </div>
-                \n
+                </div>
             `
     }
 
