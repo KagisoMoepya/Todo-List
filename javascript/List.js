@@ -60,7 +60,20 @@ export class List {
      * @param {any} task_text
      */
     set setTasksArray (task_text) {
-        this.tasks_array.push(new Task(task_text))
+        this.tasks_array.push(new Task(task_text, this.tasks_array.length))
+    }
+
+    get recallList() {
+        const tasks = this.tasks_array
+        let tasks_DOM_array = []
+        let joined_tasks = ''
+
+        tasks.forEach(task => tasks_DOM_array.push(task.createTaskDOM))
+
+        if(tasks.length > 0) {
+            joined_tasks = tasks_DOM_array.join('\n');
+        }
+        return joined_tasks
     }
 
     get createListDOM() {
@@ -81,10 +94,7 @@ export class List {
                     </div>
 
                     <div class="tasks_selectors_wrapper">
-                        <div data-task-order="" class="task_selector completed">
-                            <div data-task-order="" class="task_circle"></div>
-                            <div data-task-order="" class="task_text">create new task</div>
-                        </div>
+                        ${this.recallList}
                     </div>
 
                     <div class="task_input_wrapper">

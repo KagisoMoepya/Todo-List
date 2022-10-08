@@ -36,6 +36,15 @@ export class Task {
         this.task_status = task_status
     }
 
+    get createTaskDOM() {
+        return (`
+            <div class="task_selector ${this.task_status}" data-task-order="${this.task_index}">
+                <div class="task_circle" data-task-order="${this.task_index}"></div>
+                <div class="task_text" data-task-order="${this.task_index}">${this.task_text}</div>
+            </div>
+        `)
+    }
+
     
 
 }

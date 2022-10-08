@@ -57,13 +57,40 @@ list_items.addEventListener('click', e => {
                 list_DOM.classList.remove('inactive')
                 list_DOM.classList.add('active')
                 section.innerHTML = list_data.createTasksBoxDOM
+
+                createNewTask(section, list_data)
+
             } else {
                 list_data.setActiveStatus = 'inactive'
                 list_DOM.classList.remove('active')
                 list_DOM.classList.add('inactive')
             }
         })
-
     }
-
 })
+
+function createNewTask(section, list_data) {
+    
+    const task_input = section.querySelector('#task_input')
+    const tasks_selectors_wrapper = section.querySelector('.tasks_selectors_wrapper')
+
+    task_input.addEventListener('keyup', (e) => {
+    
+        if(e.key === 'Enter' && e.target.value !== '') {
+            const task_text = task_input.value
+
+            list_data.setTasksArray = task_text
+
+            const tasks_array = list_data.getTasksArray
+            const task_index = list_data.getTasksArray.length - 1
+            const task = list_data.getTasksArray[task_index]
+            
+            tasks_selectors_wrapper.innerHTML += task.createTaskDOM
+            return task_input.value = ''
+        }
+    
+    })
+}
+
+
+
