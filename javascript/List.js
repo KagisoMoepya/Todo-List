@@ -28,7 +28,7 @@ export class List {
     /**
      * Gets the position of the list
      */
-    get getDataOrder () {
+    get getListIndex () {
         return this.list_index
     }
 
@@ -36,23 +36,12 @@ export class List {
      * Sets the position of the list
      * @param {any} list_index
      */
-    set setDataOrder (list_index) {
+    set setListIndex (list_index) {
         this.list_index = list_index
     }
 
     get getTasksArray () {
         return this.tasks_array
-    }
-
-    get getRemainingTasks() {
-        let remaining_count = 0
-        this.tasks_array.forEach(task => {
-            const task_status = task.getTaskStatus
-
-            if(task_status === 'incomplete') remaining_count++
-        })
-
-        return remaining_count
     }
 
     /**
@@ -63,7 +52,37 @@ export class List {
         this.tasks_array.push(new Task(task_text, this.tasks_array.length))
     }
 
-    get recallList() {
+    /**
+     * The function clears all completed tasks inside of tasks_array
+     * on clearing the completed tasks, new indexes are assigned to remaining tasks
+     */
+    clearCompletedTasks() {
+        const new_tasks_array = this.tasks_array.filter( task => task.getTaskStatus !== 'completed')
+
+        for(const [i, task] of new_tasks_array.entries()) task.setTaskIndex = i
+
+        this.tasks_array = new_tasks_array
+    }
+
+    /**
+     * This function will be called 3 times
+     * 1) When a list is CLICKED to refresh the data call
+     * 2) When a new task is ENTERED into an input
+     * 3) When a task is is CLICKED to state completion or incompletion
+     * @returns number of incomplete tasks within a list
+     */
+    remainingTasksCount() {
+        let remaining_count = 0
+        this.tasks_array.forEach(task => {
+            const task_status = task.getTaskStatus
+
+            if(task_status === 'incomplete') remaining_count++
+        })
+
+        return remaining_count
+    }
+
+    recallList() {
         const tasks = this.tasks_array
         let tasks_DOM_array = []
         let joined_tasks = ''
@@ -78,8 +97,8 @@ export class List {
 
     get createListDOM() {
         return `<div class="list_item_wrapper ${this.active_status}" data-list-index="${this.list_index}">
-                        <div class="list_circle"></div>
-                        <div class="list_name_selector">${this.list_name}</div>
+                    <div class="list_circle"></div>
+                    <div class="list_name_selector">${this.list_name}</div>
                 </div>
             `
     }
@@ -90,11 +109,11 @@ export class List {
                 <div id="tasks_container">
                     <div class="tasks_count_wrapper">
                         <h3>${this.list_name}</h3>
-                        <p>${this.getRemainingTasks} tasks remaining</p>
+                        <p class="tasks_remaining">${this.remainingTasksCount()} tasks remaining</p>
                     </div>
 
                     <div class="tasks_selectors_wrapper">
-                        ${this.recallList}
+                        ${this.recallList()}
                     </div>
 
                     <div class="task_input_wrapper">

@@ -1,6 +1,5 @@
 import { ListsController } from "./ListsController.js";
 
-
 /**
  * New Instance of the list controller
  */
@@ -27,7 +26,7 @@ const section = document.querySelector('section')
 list_input.addEventListener('keyup', (e) => {
     
     if(e.key === 'Enter' && e.target.value !== '') {
-        const list_name = list_input.value
+        const list_name = listsController.capitalizeFirstLetter(list_input.value)
         
         listsController.setListsController = list_name
         const list = listsController.getListsController[listsController.getControllerLength - 1]
@@ -49,7 +48,7 @@ list_items.addEventListener('click', e => {
 
         list_item_wrapper.forEach(list_DOM => {
             const compared_index = list_DOM.getAttribute('data-list-index')
-            const list_data = listsController.getListsController[compared_index]
+            const list_data = listsController.getListsController[compared_index] // A Single list
             const index_bool = target_index === compared_index ? true : false
 
             if (index_bool) {
@@ -59,6 +58,8 @@ list_items.addEventListener('click', e => {
                 section.innerHTML = list_data.createTasksBoxDOM
 
                 createNewTask(section, list_data)
+                onTaskClick(section, list_data)
+                clearCompletedTasks(section, list_data)
 
             } else {
                 list_data.setActiveStatus = 'inactive'
@@ -69,28 +70,67 @@ list_items.addEventListener('click', e => {
     }
 })
 
-function createNewTask(section, list_data) {
-    
+function createNewTask(section, list_data) { // List data means a single list
+    const tasks_remaining_count = section.querySelector('.tasks_remaining')
     const task_input = section.querySelector('#task_input')
     const tasks_selectors_wrapper = section.querySelector('.tasks_selectors_wrapper')
+    const tasks_array = list_data.getTasksArray
 
     task_input.addEventListener('keyup', (e) => {
     
         if(e.key === 'Enter' && e.target.value !== '') {
-            const task_text = task_input.value
+            const task_text = listsController.capitalizeFirstLetter(task_input.value)
 
             list_data.setTasksArray = task_text
 
-            const tasks_array = list_data.getTasksArray
             const task_index = list_data.getTasksArray.length - 1
             const task = list_data.getTasksArray[task_index]
             
+            tasks_remaining_count.innerHTML = `${list_data.remainingTasksCount()} tasks remaining`
             tasks_selectors_wrapper.innerHTML += task.createTaskDOM
+            onTaskClick(section, list_data)
             return task_input.value = ''
         }
-    
     })
 }
 
+function onTaskClick(section, list_data) {
+    const tasks_selectors_wrapper = section.querySelector('.tasks_selectors_wrapper')
+    const tasks_remaining = section.querySelector('.tasks_remaining')
+    const task_selector = tasks_selectors_wrapper.querySelectorAll('.task_selector')
+    const tasks_array = list_data.getTasksArray
 
+    task_selector.forEach(taskDOM => {
+        tasks_selectors_wrapper.addEventListener('click', e => {
+            const task_index = taskDOM.getAttribute('data-task-order')
+            const task = tasks_array[task_index]
+            const task_target = e.target
 
+            if(taskDOM.contains(task_target) && taskDOM.classList.contains('incomplete')) {
+                taskDOM.classList.remove('incomplete')
+                taskDOM.classList.add('completed')
+                task.setTaskStatus = 'completed'
+                tasks_remaining.innerHTML = `${list_data.remainingTasksCount()} tasks remaining`
+            } else if(taskDOM.contains(task_target) && taskDOM.classList.contains('completed')) {
+                taskDOM.classList.remove('completed')
+                taskDOM.classList.add('incomplete')
+                task.setTaskStatus = 'incomplete'
+                tasks_remaining.innerHTML = `${list_data.remainingTasksCount()} tasks remaining`
+            }
+
+        })
+    })
+} 
+
+function clearCompletedTasks(section, list_data) {
+    const tasks_selectors_wrapper = section.querySelector('.tasks_selectors_wrapper')
+    const clear_tasks_btn = section.querySelector('.clear_tasks_btn')
+
+    clear_tasks_btn.addEventListener('click', e => {
+
+        list_data.clearCompletedTasks()
+        tasks_selectors_wrapper.innerHTML = list_data.recallList()
+        onTaskClick(section, list_data)
+
+    })
+}
