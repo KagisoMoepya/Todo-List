@@ -82,7 +82,7 @@ export class List {
         return remaining_count
     }
 
-    recallList() {
+    recallListTasksDOM() {
         const tasks = this.tasks_array
         let tasks_DOM_array = []
         let joined_tasks = ''
@@ -96,7 +96,8 @@ export class List {
     }
 
     get createListDOM() {
-        return `<div class="list_item_wrapper ${this.active_status}" data-list-index="${this.list_index}">
+        return `
+                <div class="list_item_wrapper ${this.active_status}" data-list-index="${this.list_index}">
                     <div class="list_circle"></div>
                     <div class="list_name_selector">${this.list_name}</div>
                 </div>
@@ -105,7 +106,7 @@ export class List {
 
     get createTasksBoxDOM() {
         return (`
-            <div id="list_content_container">
+            <div id="list_content_container" box-list-index="${this.list_index}">
                 <div id="tasks_container">
                     <div class="tasks_count_wrapper">
                         <h3>${this.list_name}</h3>
@@ -113,7 +114,7 @@ export class List {
                     </div>
 
                     <div class="tasks_selectors_wrapper">
-                        ${this.recallList()}
+                        ${this.recallListTasksDOM()}
                     </div>
 
                     <div class="task_input_wrapper">

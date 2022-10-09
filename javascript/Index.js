@@ -33,7 +33,6 @@ list_input.addEventListener('keyup', (e) => {
         list_items.innerHTML += list.createListDOM
         return list_input.value = ''
     }
-
 })
 
 /**
@@ -60,6 +59,7 @@ list_items.addEventListener('click', e => {
                 createNewTask(section, list_data)
                 onTaskClick(section, list_data)
                 clearCompletedTasks(section, list_data)
+                deleteList(section, list_data)
 
             } else {
                 list_data.setActiveStatus = 'inactive'
@@ -117,7 +117,6 @@ function onTaskClick(section, list_data) {
                 task.setTaskStatus = 'incomplete'
                 tasks_remaining.innerHTML = `${list_data.remainingTasksCount()} tasks remaining`
             }
-
         })
     })
 } 
@@ -127,10 +126,20 @@ function clearCompletedTasks(section, list_data) {
     const clear_tasks_btn = section.querySelector('.clear_tasks_btn')
 
     clear_tasks_btn.addEventListener('click', e => {
-
         list_data.clearCompletedTasks()
-        tasks_selectors_wrapper.innerHTML = list_data.recallList()
+        tasks_selectors_wrapper.innerHTML = list_data.recallListTasksDOM()
         onTaskClick(section, list_data)
+    })
+}
 
+function deleteList(section, list_data) {
+    const list_content_container = section.querySelector('#list_content_container')
+    const list_index = list_content_container.getAttribute('box-list-index')
+    const delete_list_btn = section.querySelector('.delete_list_btn')
+
+    delete_list_btn.addEventListener('click', e => {
+        list_content_container.remove()
+        list_items.innerHTML = listsController.deleteList(parseInt(list_index))
+        list_items.innerHTML = listsController.recallListsDOM()
     })
 }
